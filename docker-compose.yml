@@ -1,0 +1,11 @@
+services:
+    haltere-pg:
+        image: bitnami/postgresql:latest
+        container_name: haltere-pg
+        environment:
+            - POSTGRESQL_USERNAME=haltere
+            - POSTGRESQL_PASSWORD=haltere
+            - POSTGRESQL_POSTGRES_PASSWORD=haltereadmin
+            - POSTGRESQL_DATABASE=halteresolid
+        ports:
+            - "5432:5432"
