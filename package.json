@@ -5,10 +5,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js",
-    "build": "tsup src/server.ts"
+    "build": "tsup src/server.ts",
+    "test:coverage": "vitest --coverage",
+    "test:ui": "vitest --ui"
   },
   "keywords": [],
   "author": "",
@@ -18,12 +20,15 @@
     "@eslint/js": "^10.0.1",
     "@types/node": "^25.9.0",
     "@types/pg": "^8.20.0",
+    "@vitest/coverage-v8": "4.1.7",
+    "@vitest/ui": "^4.1.7",
     "eslint": "^10.4.0",
     "prisma": "^7.8.0",
     "tsup": "^8.5.1",
     "tsx": "^4.22.2",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.3"
+    "typescript-eslint": "^8.59.3",
+    "vitest": "^4.1.7"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
