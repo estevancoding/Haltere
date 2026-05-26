@@ -16,7 +16,7 @@ interface CreateUserResponse {
 export class CreateUserService {
   constructor(private usersRepository: UsersRepository) {}
 
-  async create({
+  async execute({
     name,
     email,
     password,

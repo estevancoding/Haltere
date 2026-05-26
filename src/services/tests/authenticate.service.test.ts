@@ -29,7 +29,7 @@ describe("Authenticate Service", () => {
   });
 
   it("Should not be able to authenticate with a wrong email", async () => {
-    expect(
+    await expect(
       async () =>
         await sut.execute({
           email: "johndoes@example.com",
@@ -38,14 +38,14 @@ describe("Authenticate Service", () => {
     ).rejects.toBeInstanceOf(InvalidCredentialError);
   });
 
-  it("Should not be able to authenticate with a wrong email", async () => {
+  it("Should not be able to authenticate with a wrong password", async () => {
     await inMemoryUsers.create({
       name: "John Doe",
       email: "johndoe@example.com",
       password_hash: await hash("123456", 6),
     });
 
-    expect(
+    await expect(
       async () =>
         await sut.execute({
           email: "johndoe@example.com",

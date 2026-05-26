@@ -14,7 +14,7 @@ describe("Create User Service", () => {
   });
 
   it("should be able to create a new user", async () => {
-    const { user } = await sut.create({
+    const { user } = await sut.execute({
       name: "John Doe",
       email: "johndoe@example.com",
       password: "123456",
@@ -24,7 +24,7 @@ describe("Create User Service", () => {
   });
 
   it("should hash user password during registration", async () => {
-    const { user } = await sut.create({
+    const { user } = await sut.execute({
       name: "John Doe",
       email: "johndoe@example.com",
       password: "123456",
@@ -41,14 +41,14 @@ describe("Create User Service", () => {
   it("should not be able to create a user with a email that already exists", async () => {
     const email = "johndoe@example.com";
 
-    await sut.create({
+    await sut.execute({
       name: "John Doe",
       email,
       password: "123456",
     });
 
     await expect(() =>
-      sut.create({
+      sut.execute({
         name: "John Doe",
         email,
         password: "123456",
