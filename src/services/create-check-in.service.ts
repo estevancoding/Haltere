@@ -19,8 +19,8 @@ interface CheckInResponse {
 
 export class CheckInService {
   constructor(
-    private checkInRepository: CheckInsRepository,
-    private gymRepository: GymsRepository,
+    private checkInsRepository: CheckInsRepository,
+    private gymsRepository: GymsRepository,
   ) {}
 
   async execute({
@@ -29,7 +29,7 @@ export class CheckInService {
     userLatitude,
     userLongitude,
   }: CheckInRequest): Promise<CheckInResponse> {
-    const gym = await this.gymRepository.findById(gymId);
+    const gym = await this.gymsRepository.findById(gymId);
 
     if (!gym) {
       throw new ResourceNotFoundError("Gym");
@@ -49,7 +49,7 @@ export class CheckInService {
       throw new MaxDistanceError();
     }
 
-    const checkInOnSameDay = await this.checkInRepository.findByUserIdOnDate(
+    const checkInOnSameDay = await this.checkInsRepository.findByUserIdOnDate(
       userId,
       new Date(),
     );
@@ -58,7 +58,7 @@ export class CheckInService {
       throw new MaxNumberOfCheckInsError();
     }
 
-    const checkIn = await this.checkInRepository.create({
+    const checkIn = await this.checkInsRepository.create({
       gym_id: gymId,
       user_id: userId,
     });

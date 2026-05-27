@@ -13,7 +13,7 @@ describe("Create User Service", () => {
     sut = new CreateUserService(inMemoryUsers);
   });
 
-  it("should be able to create a new user", async () => {
+  it("Should be able to create a new user", async () => {
     const { user } = await sut.execute({
       name: "John Doe",
       email: "johndoe@example.com",
@@ -23,7 +23,7 @@ describe("Create User Service", () => {
     expect(user);
   });
 
-  it("should hash user password during registration", async () => {
+  it("Should hash user password during registration", async () => {
     const { user } = await sut.execute({
       name: "John Doe",
       email: "johndoe@example.com",
@@ -38,7 +38,7 @@ describe("Create User Service", () => {
     expect(isPasswordCorrectlyHashed).toBe(true);
   });
 
-  it("should not be able to create a user with a email that already exists", async () => {
+  it("Should not be able to create a user with an email that already exists", async () => {
     const email = "johndoe@example.com";
 
     await sut.execute({

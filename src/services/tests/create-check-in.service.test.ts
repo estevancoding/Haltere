@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-check-ins.repository";
-import { CheckInService } from "../check-in.service";
+import { CheckInService } from "../create-check-in.service";
 import { randomUUID } from "node:crypto";
 import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms.repository";
 import { Decimal } from "@prisma/client/runtime/client";
@@ -13,7 +13,7 @@ let inMemoryGyms: InMemoryGymsRepository;
 const userId = randomUUID();
 const gymId = randomUUID();
 
-describe("Check In service", () => {
+describe("Create Check-in Service", () => {
   beforeEach(async () => {
     inMemoryCheckIns = new InMemoryCheckInsRepository();
     inMemoryGyms = new InMemoryGymsRepository();
@@ -47,7 +47,7 @@ describe("Check In service", () => {
     expect(checkIn);
   });
 
-  it("Should not be able to check in twice in the same day", async () => {
+  it("Should not be able to check in twice on the same day", async () => {
     const userId = randomUUID();
 
     await sut.execute({
@@ -68,7 +68,7 @@ describe("Check In service", () => {
     ).rejects.toBeInstanceOf(MaxNumberOfCheckInsError);
   });
 
-  it("Should be able to check in but in different days", async () => {
+  it("Should be able to check in on different days", async () => {
     await sut.execute({
       gymId,
       userId,
@@ -88,7 +88,7 @@ describe("Check In service", () => {
     expect(checkIn);
   });
 
-  it("Should not be able to check in on a distant gym", async () => {
+  it("Should not be able to check in at a distant gym", async () => {
     const testGymCoordinate = randomUUID();
 
     inMemoryGyms.create({

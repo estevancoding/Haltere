@@ -7,13 +7,13 @@ import { ResourceNotFoundError } from "../errors/resource-not-found.error";
 let inMemoryUsers: InMemoryUsersRepository;
 let sut: GetUserService;
 
-describe("Get user service", () => {
+describe("Get User Profile Service", () => {
   beforeEach(() => {
     inMemoryUsers = new InMemoryUsersRepository();
     sut = new GetUserService(inMemoryUsers);
   });
 
-  it("Should be able to return a user", async () => {
+  it("Should be able to get a user profile", async () => {
     const createdUser = await inMemoryUsers.create({
       name: "John Doe",
       email: "johndoe@example.com",
@@ -27,7 +27,7 @@ describe("Get user service", () => {
     expect(user);
   });
 
-  it("Should not be able to return a user", async () => {
+  it("Should not be able to get a non-existent user profile", async () => {
     await expect(
       async () =>
         await sut.execute({
