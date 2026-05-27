@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-check-ins.repository";
-import { CheckInService } from "../create-check-in.service";
+import { CreateCheckInService } from "../create-check-in.service";
 import { randomUUID } from "node:crypto";
 import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms.repository";
 import { Decimal } from "@prisma/client/runtime/client";
@@ -8,7 +8,7 @@ import { MaxNumberOfCheckInsError } from "../errors/max-check-ins.error";
 import { MaxDistanceError } from "../errors/max-distance.error";
 
 let inMemoryCheckIns: InMemoryCheckInsRepository;
-let sut: CheckInService;
+let sut: CreateCheckInService;
 let inMemoryGyms: InMemoryGymsRepository;
 const userId = randomUUID();
 const gymId = randomUUID();
@@ -17,7 +17,7 @@ describe("Create Check-in Service", () => {
   beforeEach(async () => {
     inMemoryCheckIns = new InMemoryCheckInsRepository();
     inMemoryGyms = new InMemoryGymsRepository();
-    sut = new CheckInService(inMemoryCheckIns, inMemoryGyms);
+    sut = new CreateCheckInService(inMemoryCheckIns, inMemoryGyms);
 
     vi.useFakeTimers();
     vi.setSystemTime(new Date(2026, 4, 23, 8, 0, 0));

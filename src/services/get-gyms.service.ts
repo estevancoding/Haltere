@@ -10,7 +10,7 @@ interface GetGymsResponse {
   gyms: Gym[];
 }
 
-export class GetGymssService {
+export class GetGymsService {
   constructor(private gymsRepository: GymsRepository) {}
 
   async execute({ query, page }: GetGymsRequest): Promise<GetGymsResponse> {

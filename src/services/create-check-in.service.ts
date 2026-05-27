@@ -6,18 +6,18 @@ import getDistanceBetweenCoordinates from "@/utils/get-distance-between-coordina
 import { MaxDistanceError } from "./errors/max-distance.error";
 import { MaxNumberOfCheckInsError } from "./errors/max-check-ins.error";
 
-interface CheckInRequest {
+interface CreateCheckInRequest {
   userId: string;
   gymId: string;
   userLatitude: number;
   userLongitude: number;
 }
 
-interface CheckInResponse {
+interface CreateCheckInResponse {
   checkIn: CheckIn;
 }
 
-export class CheckInService {
+export class CreateCheckInService {
   constructor(
     private checkInsRepository: CheckInsRepository,
     private gymsRepository: GymsRepository,
@@ -28,7 +28,7 @@ export class CheckInService {
     gymId,
     userLatitude,
     userLongitude,
-  }: CheckInRequest): Promise<CheckInResponse> {
+  }: CreateCheckInRequest): Promise<CreateCheckInResponse> {
     const gym = await this.gymsRepository.findById(gymId);
 
     if (!gym) {
