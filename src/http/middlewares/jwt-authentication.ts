@@ -8,5 +8,6 @@ export async function jwtAuthentication(
     await req.jwtVerify();
   } catch (err) {
     return res.status(401).send({ message: "Unauthorized", Error: err });
+    
   }
 }
