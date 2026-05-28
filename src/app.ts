@@ -2,10 +2,17 @@ import fastify from "fastify";
 import { usersRoutes } from "./http/routes/users.routes";
 import z, { ZodError } from "zod";
 import { env } from "./env";
+import fastifyJwt from "@fastify/jwt";
 
 export const app = fastify({
   logger: true,
 });
+
+
+app.register(fastifyJwt, {
+  secret: env.JWT_SECRET,
+});
+
 
 app.register(usersRoutes);
 
